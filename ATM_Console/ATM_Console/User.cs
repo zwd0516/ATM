@@ -10,6 +10,9 @@ namespace ATM_Console
     /// <summary>
     /// Abstract class inherited by classes containing information on the user.
     /// </summary>
+    /// <todo>
+    /// Establish inheritance relationship to class Account; transfer code from Account to User.
+    /// </todo>
     abstract class User
     {
         #region Constructors
