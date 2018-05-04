@@ -57,8 +57,8 @@ namespace ATM_Console
         private string _password = "";
         /// <summary>
         /// The account's balance.
-        /// Measuring in cents allows representation as an integer to avoid potential for
-        /// rounding errors that can occur with floating point variables.
+        /// Measuring in cents allows representation as an integer, eliminating potential for
+        /// rounding errors that could occur with float, double, or decimal.
         /// </summary>
         private int _balance = 0;
         #endregion
@@ -82,6 +82,13 @@ namespace ATM_Console
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Tries to open the Account's associated text file and saves data in the Account.
+        /// <usage>
+        /// Assumes the first line in the text file contains the password, and the second line
+        /// contains the balance represented in cents.
+        /// </usage>
+        /// </summary>
         private void GetAccountInfo()
         {
             StreamReader streamReader;
@@ -98,19 +105,7 @@ namespace ATM_Console
             catch
             {
                 Console.WriteLine("error.");
-                Password = "error";
             }
-        }
-
-        /// <summary>
-        /// Reports a string containing an error message to the console.
-        /// </summary>
-        /// <param name="error">
-        /// String containing the error message to be reported.
-        /// </param>
-        private void ReportError(string error)
-        {
-            Console.WriteLine(error);
         }
 
         /// <summary>
@@ -133,6 +128,22 @@ namespace ATM_Console
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Changes the value of Balance, then logs it in the Account's associated text file.
+        /// The old balance stored in the text file is overwritten.
+        /// </summary>
+        /// <param name="deltaBalance">
+        /// The value in dollars that will be added to Balance.
+        /// Before this occurs, it is first converted from dollars to cents.
+        /// </param>
+        /// <returns></returns>
+        public bool ChangeBalance(decimal deltaBalance)
+        {
+            deltaBalance *= 100;
+            Balance += (int)deltaBalance;
+            return true;
         }
         #endregion
     }
