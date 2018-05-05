@@ -11,7 +11,6 @@ namespace ATM_Console
     {
         #region Fields
         public const string CONTINUE_PROMPT = "\n\nPress ENTER to continue.";
-        public const string ACCOUNT_FILE_DIRECTORY = @"D:\ZachLittleLenovoBackup\BHSU\CSC 260\Final Project\repos\ATM_Console\bin\Debug\";
         ///public const string LINE_SEPARATOR = "\n\t\t*\t*\t*\n";
         ///public const string HEADER_CHECK_BALANCE = "CHECK BALANCE" + LINE_SEPARATOR;
         ///public const string HEADER_MAKE_DEPOSIT = "MAKE A DEPOSIT";
@@ -136,7 +135,7 @@ namespace ATM_Console
                 //}
                 //else
                 //{
-                StreamReader sr = new StreamReader(ACCOUNT_FILE_DIRECTORY + "Account" + input + ".txt");
+                StreamReader sr = new StreamReader("Account" + input + ".txt");
                     Console.WriteLine("Error -- Account not found." + CONTINUE_PROMPT);
                     truthiness = false;
                     Console.ReadLine();

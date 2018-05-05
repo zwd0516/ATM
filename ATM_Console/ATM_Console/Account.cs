@@ -30,7 +30,7 @@ namespace ATM_Console
         public Account(string accountNumber)
         {
             _accountNumber = accountNumber;
-            _accountFilePath = /*Program.ACCOUNT_FILE_DIRECTORY + */"Account" + _accountNumber + ".txt";
+            _accountFilePath = "Account" + _accountNumber + ".txt";
             GetAccountInfo();
         }
         #endregion
