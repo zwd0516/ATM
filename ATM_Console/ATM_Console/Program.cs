@@ -22,13 +22,37 @@ namespace ATM_Console
             string input;
             bool truthiness = false;
 
-            input = RetrieveAccount();
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Please enter your account number.");
+                input = Console.ReadLine();
+                StreamReader streamReader;
+                try
+                {
+                    streamReader = new StreamReader("Account" + input + ".txt");
+                    truthiness = true;
+                    streamReader.Close();
+                }
+                catch
+                {
+                    Console.WriteLine("Error -- Account not found." + CONTINUE_PROMPT);
+                }
+
+                if (truthiness == true)
+                {
+                    break;
+                }
+                Console.ReadLine();
+            } while (truthiness == false);
+
             Account account = new Account(input);
             Console.WriteLine("Found Account " + account.AccountNumber + "." + CONTINUE_PROMPT);
             Console.ReadLine();
 
             /// Reset values of input and truthiness.
             input = "";
+            truthiness = false;
 
             /// This do-while loop contains the bulk of where the interesting stuff happens.
             do
@@ -115,34 +139,6 @@ namespace ATM_Console
             Console.Clear();
             Console.WriteLine("Thank you for your business!");
             Console.ReadLine();
-        }
-
-        static string RetrieveAccount()
-        {
-            string input = "";
-            bool truthiness = false;
-
-            do
-            {
-                Console.Clear();
-                Console.WriteLine("Please enter your account number.");
-                input = Console.ReadLine();
-                /// Check if file with supplied number exists.
-                //if (File.Exists(ACCOUNT_FILE_DIRECTORY + "Account" + input + ".txt"))
-                //{
-                    /// Meet conditions to break do-while loop.
-                    truthiness = true;
-                //}
-                //else
-                //{
-                StreamReader sr = new StreamReader("Account" + input + ".txt");
-                    Console.WriteLine("Error -- Account not found." + CONTINUE_PROMPT);
-                    truthiness = false;
-                    Console.ReadLine();
-                //}
-            } while (truthiness == false);
-
-            return input;
         }
         #endregion
     }

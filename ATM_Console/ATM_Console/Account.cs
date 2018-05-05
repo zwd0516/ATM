@@ -29,8 +29,7 @@ namespace ATM_Console
         /// </param>
         public Account(string accountNumber)
         {
-            _accountNumber = accountNumber;
-            _accountFilePath = "Account" + _accountNumber + ".txt";
+            this._accountNumber = accountNumber;
             GetAccountInfo();
         }
         #endregion
@@ -51,10 +50,6 @@ namespace ATM_Console
         /// The four-digit number associated with the account. Read-only.
         /// </summary>
         private readonly string _accountNumber;
-        /// <summary>
-        /// The location of the account's file in memory.
-        /// </summary>
-        private readonly string _accountFilePath;
         /// <summary>
         /// The four-digit PIN associated with the account.
         /// Required for validation of transactions.
@@ -100,7 +95,7 @@ namespace ATM_Console
             
             try
             {
-                streamReader = new StreamReader(_accountFilePath);
+                streamReader = new StreamReader("Account" + _accountNumber + ".txt");
 
                 Password = streamReader.ReadLine();        
                 Balance = Convert.ToInt32(streamReader.ReadLine());
@@ -148,13 +143,7 @@ namespace ATM_Console
         {
             deltaBalance *= 100;
             Balance += (int)deltaBalance;
-                try
-                {
-                    StreamWriter sw = new StreamWriter(_accountFilePath);
-                    sw.WriteLine(Balance);
-                    return true;
-                }
-                catch { return false; }
+            return true;
         }
         #endregion
     }
