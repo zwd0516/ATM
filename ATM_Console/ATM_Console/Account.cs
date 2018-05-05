@@ -148,13 +148,16 @@ namespace ATM_Console
         {
             deltaBalance *= 100;
             Balance += (int)deltaBalance;
-                try
-                {
-                    StreamWriter sw = new StreamWriter(_accountFilePath);
-                    sw.WriteLine(Balance);
-                    return true;
-                }
-                catch { return false; }
+            try
+            {
+                File.WriteAllText(_accountFilePath, "");
+                StreamWriter sw = new StreamWriter(_accountFilePath);
+                sw.WriteLine(Password);
+                sw.WriteLine(Balance.ToString());
+                sw.Close();
+                return true;
+            }
+            catch { return false; }
         }
         #endregion
     }
