@@ -128,18 +128,20 @@ namespace ATM_Console
                 Console.WriteLine("Please enter your account number.");
                 input = Console.ReadLine();
                 /// Check if file with supplied number exists.
-                //if (File.Exists(ACCOUNT_FILE_DIRECTORY + "Account" + input + ".txt"))
-                //{
-                    /// Meet conditions to break do-while loop.
+                try//if (File.Exists(ACCOUNT_FILE_DIRECTORY + "Account" + input + ".txt"))
+                {
+                    StreamReader sr = new StreamReader("Account" + input + ".txt");
+                    ///Meet conditions to break do-while loop.
                     truthiness = true;
-                //}
-                //else
-                //{
-                StreamReader sr = new StreamReader("Account" + input + ".txt");
+                    sr.Close();
+                }
+                catch//else
+                {
+                //StreamReader sr = new StreamReader("Account" + input + ".txt");
                     Console.WriteLine("Error -- Account not found." + CONTINUE_PROMPT);
                     truthiness = false;
                     Console.ReadLine();
-                //}
+                }
             } while (truthiness == false);
 
             return input;
